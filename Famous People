@@ -1,0 +1,75 @@
+CREATE table celebrity
+    (id INTEGER PRIMARY KEY, 
+    first_name TEXT, 
+    last_name TEXT); 
+
+INSERT INTO celebrity (first_name, last_name) VALUES ("Denzel", "Washington");
+INSERT INTO celebrity (first_name, last_name) VALUES ("Chris", "Tucker"); 
+INSERT INTO celebrity (first_name, last_name) VALUES ("Donnie", "Yen"); 
+INSERT INTO celebrity (first_name, last_name) VALUES ("Jackie", "Chan");
+INSERT INTO celebrity (first_name, last_name) VALUES ("SugarRay", "Leonard");
+INSERT INTO celebrity (first_name, last_name) VALUES ("Roy", "Jonesjr");
+INSERT INTO celebrity (first_name, last_name) VALUES ("Floyd", "Mayweatherjr");
+INSERT INTO celebrity (first_name, last_name) VALUES ("Mike", "Tyson");
+
+CREATE table occupation 
+    (celebrity_id INTEGER PRIMARY KEY , 
+    type TEXT, 
+    activity TEXT);
+    
+    INSERT INTO occupation (type, activity) VALUES ("Actor", "active");
+    INSERT INTO occupation (type, activity) VALUES ("Actor", "retired");
+    INSERT INTO occupation (type, activity) VALUES ("Actor", "active");
+    INSERT INTO occupation (type, activity) VALUES ("Actor", "retired");
+    INSERT INTO occupation (type, activity) VALUES ("Boxer", "retired");
+    INSERT INTO occupation (type, activity) VALUES ("Boxer", "retired"); 
+    INSERT INTO occupation (type, activity) VALUES ("Boxer", "retired");
+    INSERT INTO occupation (type, activity) VALUES ("Boxer and Actor", "retired"); 
+
+CREATE table bio
+    (id INTEGER PRIMARY KEY, 
+    birthplace text,
+    movies TEXT); 
+    
+    INSERT INTO bio (birthplace, movies) VALUES ("Mount Vernon NY", "The Equalizer 1-3");
+    INSERT INTO bio (birthplace, movies) VALUES ("Atlanta Georgia", "Rush Hour 1-4"); 
+    INSERT INTO bio (birthplace, movies) VALUES ("Guangzhou China", "IP Man 2"); 
+    INSERT INTO bio (birthplace, movies) VALUES ("Hong Kong China", "Rush Hour 1-4"); 
+    INSERT INTO bio (birthplace, movies) VALUES ("Wilmington North Carolina", "NULL");
+    INSERT INTO bio (birthplace, movies) VALUES ("Pensacola Florida", "NULL");
+    INSERT INTO bio (birthplace, movies) VALUES ("Grand Rapids Michigan", "NULL");
+    INSERT INTO bio (birthplace, movies) VALUES ("Brooklyn NY", "IP Man 2");
+    
+
+/* Select the names of celebritys with their type of work and activity status  */
+
+SELECT first_name, last_name, type, activity 
+    FROM celebrity 
+    LEFT OUTER JOIN occupation
+    ON celebrity_id = celebrity.id;
+    
+    /* Show celebrities first and last name as well as the movies they were in  */
+    
+    
+SELECT movies, first_name, last_name
+    FROM bio
+    LEFT OUTER JOIN celebrity 
+    ON celebrity.id = bio.id; 
+    
+    /* Show celebrities in movies Rush Hour 1-4 */
+    
+    
+SELECT movies, first_name, last_name
+    FROM bio 
+    LEFT OUTER JOIN celebrity 
+    ON bio.id = celebrity.id 
+    WHERE  bio.movies IN ("Rush Hour 1-4");  
+    
+  /* Show all celebrities in movies IP Man 2 */
+       
+    
+SELECT movies, first_name, last_name
+    FROM bio 
+    LEFT OUTER JOIN celebrity 
+    ON bio.id = celebrity.id 
+    WHERE  bio.movies IN ("IP Man 2");  
